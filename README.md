@@ -60,6 +60,8 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
    > [BACKEND] Server is running on port 5000
    > [BACKEND] Database connected: mongodb://127.0.0.1/wanderlust
    > ```
+   
+   Now you can access the server from browser using [publicip:5000]
 
 ### Setting up the Frontend
 
@@ -76,16 +78,27 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
    ```
 
 3. **Configure Environment Variables**
+   open `.env.sample` file and change the localhost with EC2 server public IP address and save. then run below
 
    ```bash
    cp .env.sample .env.local
    ```
 
-4. **Launch the Development Server**
+4. **Launch the Development Server without exposing port**
 
    ```bash
    npm run dev
    ```
+   **Launch the Development Server with exposing network port**
+
+   ```bash
+   npm run dev -- --host
+   ```
+   **Launch the Development Server in Background**
+   ```bash
+   nohup npm run dev -- --host &
+   ```
+
 
 ## 🌟 Ready to Contribute?
 
