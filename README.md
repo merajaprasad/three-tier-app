@@ -97,6 +97,94 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
    ```
 
 
+## Deploy on Docker Container on AWS EC2
+
+   **Install docker on Ubuntu**
+   ```
+   sudo apt-get install docker.io
+   ```
+### Setting up backend Container
+
+   **Navigate to the Backend Directory**
+
+   ```bash
+   cd backend
+   ```
+
+   **Create Dockerfile**
+   ```
+   FROM node:21
+   WORKDIR /app
+   COPY . .
+   RUN npm i
+   COPY .env.sample .env
+   EXPOSE 5000
+   CMD ["npm","start"]
+   ```
+   **Build Backend image through dockerfile**
+   ```
+   sudo docker build -t backend .
+   ```
+   **Install mongodb Image**
+   ```
+   sudo docker run -d -p 27017:27017 --name mongo mongo:latest
+   ```
+   now go inside mongoDB container `docker exec -it mongo bash` and run the command `mongosh` to test mongoDB is instlled and running.
+
+   **create and run backend container**
+   ```
+   sudo docker run -d -p 5000:5000 --name backend backend:latest
+   ```
+### Setting up Frontend Container
+
+   **Navigate to the Frontend Directory**
+
+   ```bash
+   cd frontend
+   ```
+   **Create Dockerfile**
+   ```
+   FROM node:21
+   WORKDIR /app
+   COPY . .
+   RUN npm i
+   COPY .env.sample .env.local
+   EXPOSE 5173
+   CMD ["npm", "run", "dev", "--", "--host"] 
+   ```
+   **Build Frontend image through dockerfile**
+   ```
+   sudo docker build -t frontend .
+   ```
+   **Run frontend container**
+   ```
+   sudo docker run -d -p 5173:5173 --name frontend frontend:latest
+   ```
+   Now you would be able to see our website is running from browser user [ publicip:5000 ]. but here feature posts backend data will not be reflect. for that we have to add the EC2 server public ip in `.env.sample` variable file. and again we have to build frontend image and create frontend container using same above command.
+    
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 🌟 Ready to Contribute?
 
 Kindly go through [CONTRIBUTING.md](https://github.com/krishnaacharyaa/wanderlust/blob/main/.github/CONTRIBUTING.md) to understand everything from setup to contributing guidelines.
