@@ -4,6 +4,10 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
 
 ![Preview Image](https://github.com/krishnaacharyaa/wanderlust/assets/116620586/17ba9da6-225f-481d-87c0-5d5a010a9538)
 
+### Prerequites
+1. Install Node.js from this [link](https://nodejs.org/en/download/package-manager)
+2. Install MongoDB from this [link](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/) for ubuntu system
+
 ## Setting up the project locally
 
 ### Setting up the Backend
