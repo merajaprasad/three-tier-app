@@ -79,7 +79,7 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
 
 3. **Configure Environment Variables**
    
-   open `.env.sample` file and change the localhost with EC2 server public IP address and save. then run below
+   open `.env.sample` file and change the _Localhost_ with EC2 server _PublicIPaddress_ and save. then run below
 
    ```bash
    cp .env.sample .env.local
