@@ -13,6 +13,9 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
 ### Setting up the Backend
 
 1. **Fork and Clone the Repository**
+   ```
+   git clone <repo-url>
+   ```
 
 2. **Navigate to the Backend Directory**
 
@@ -160,29 +163,66 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
    ```
    sudo docker run -d -p 5173:5173 --name frontend frontend:latest
    ```
-   Now you would be able to see our website is running from browser using **[ public-ip:5000 ]**. but here feature posts data will not be feach from backend. for that we have to add the backend server(where backend container is running) public ip in `.env.sample` variable file. and again we have to build frontend image and create frontend container using same above command.
-    
-
-
+   Now you would be able to see our website is running from browser using **[ public-ip:5173 ]**. but here feature posts data will not be feach from backend. for that we have to add the backend server(where backend container is running) public ip in `.env.sample` variable file. and again we have to build frontend image and create frontend container using same above command.
    
+# Docker Compose
 
+   **Install Docker-Compose on ubuntu**
+   ```
+   sudo apt-get install docker-compose
+   ```
+   ***Create Docker-compose.yml file**
 
+   ```
+   version: "3.8"
+   services:
+      mongodb:
+         container_name: mongo
+         image: mongo:latest #pull mongodb latest image from dockerhub
+         volumes:  # maping volume for sample data
+            - ./backend/data:/data # hostpath : containerpath
+         ports:
+            - "27017:27017"
 
+      backend:
+         container_name: backend
+         build: ./backend # docker file location to build image
+         env_file:
+            - ./backend/.env.sample
+         ports:
+            - "5000:5000"
+         depends_on: # backend-container depend-on mongodb-container to create
+            - mongodb
 
+      frontend:
+         container_name: frontend
+         build: ./frontend # docker file location to build image
+         env_file:
+            - ./backend/.env.sample
+         ports:
+            - "5173:5173"
 
+   # Declaring the volume
 
+   volumes:
+      data:
 
+   ```
 
+   **Run docker compose file**
+   
+   before running the docker-compose file we have to add mongodb container name in `.env.sample` variable file because container usese container names to communicate, it do not use `127.0.0.1(localhost)` IP to communicate with other container. 
+   
+   ```
+   docker-compose up -d
+   ```
 
+   **import sample data**
+   ```
+   sudo docker exec -it mongo mongoimport --db wanderlust --collection posts --file ./data/sample_posts.json --jsonArray
+   ```
 
-
-
-
-
-
-
-
-
+   Now you would be able to see our website is running from browser using **[ public-ip : 5173 ]**.
 
 
 ## 🌟 Ready to Contribute?
