@@ -129,7 +129,7 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
    ```
    sudo docker run -d -p 27017:27017 --name mongo mongo:latest
    ```
-   now go inside mongoDB container `docker exec -it mongo bash` and run the command `mongosh` to test mongoDB is installed and running.
+   now go inside mongoDB container using `docker exec -it mongo bash` and run the command `mongosh` to test mongoDB is installed and running.
 
    **create and run backend container**
    ```
@@ -160,7 +160,7 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
    ```
    sudo docker run -d -p 5173:5173 --name frontend frontend:latest
    ```
-   Now you would be able to see our website is running from browser using [ publicip:5000 ]. but here feature posts data will not be feach from backend. for that we have to add the backend server(where backend container is running) public ip in `.env.sample` variable file. and again we have to build frontend image and create frontend container using same above command.
+   Now you would be able to see our website is running from browser using **[ public-ip:5000 ]**. but here feature posts data will not be feach from backend. for that we have to add the backend server(where backend container is running) public ip in `.env.sample` variable file. and again we have to build frontend image and create frontend container using same above command.
     
 
 
